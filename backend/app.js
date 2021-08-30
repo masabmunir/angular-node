@@ -14,33 +14,25 @@ app.use(bodyParser.json());
 
 app.get('/getData', function (req, res) {
 
-    
-
-
 const query = "SELECT * from Table_1 where id='"+req.query.id+"'";
 
 sql.query(connectionString, query, (err, rows) => {
     res.status(200).json({
         rows:rows
     })
+  });
+
 });
-
-
-});
-
-
-
-
 
 app.post('/postData',(req,res)=>{
-     console.log('console data for postl',req.query.id);
-     console.log('console data for postl',req.body);
+     console.log('console data for postl',req.query.title);
+     console.log('console data for postl',req.body.title);
     // let a =2+ parseInt(req.query.data);
     // res.status(200).json({
     //     result:a
     // })
 
-    const query = "insert into Table_1 values ('"+req.body.id+"')";
+    const query = "insert into Table_1(id,title,fname,lname) values ('"+1+"','"+req.body.title+"','"+req.body.firstName+"','"+req.body.lastName+"')";
 
 sql.query(connectionString, query, (err, rows) => {
     res.status(200).json({
