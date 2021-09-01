@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   title = 'masab-work';
   registerForm!:FormGroup;
   submitted = false;
+  res: any;
 
 
   constructor(private service:AppServiceService,
@@ -34,13 +35,14 @@ export class AppComponent implements OnInit {
   getDataFromAPI(){
     this.service.getData('124').subscribe((response: any)=>{
       console.log('response from API is ', response);
+      this.res= response;
     },(error: any)=>{
       console.log('Error is ', error)
     })
   }
 
   postDataFromAPI(formdata:any){
-    let json = {name:"masab",id:1300}
+    //let json = {name:"masab",id:1300}
     
     this.service.postData(formdata).subscribe((response: any)=>{
       console.log('response from API is ', response);
@@ -64,14 +66,16 @@ export class AppComponent implements OnInit {
 
     // display form values on success
     //alert('SUCCESS!! :-)\n\n' + JSON.stringify(, null, 4));
-    let json={
-      firstname:this.registerForm.value['firstName'],
-      lastname:this.registerForm.value['lastName'],
-      title:this.registerForm.value['title'],
+    // let json={
+    //   firstname:this.registerForm.value['firstName'],
+    //   lastname:this.registerForm.value['lastName'],
+    //   title:this.registerForm.value['title'],
+    // }
 
-    }
     this.postDataFromAPI(this.registerForm.value);
-    console.log(json)
+    console.log(this.registerForm.value)
+   
+
 }
 
 onReset(){
