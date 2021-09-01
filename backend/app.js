@@ -14,33 +14,43 @@ app.use(bodyParser.json());
 
 app.get('/getData', function (req, res) {
 
-const query = "SELECT * from Table_1 where id='"+req.query.id+"'";
+    const query = "SELECT * from Table_1";
+    console.log(query,"masab");
 
-sql.query(connectionString, query, (err, rows) => {
-    res.status(200).json({
-        rows:rows
-    })
-  });
+    sql.query(connectionString, query, (err, rows) => {
+      res.send(rows)
+    });
+
+});
+app.get('/getDataById', function (req, res) {
+
+    const query = "SELECT * from Table_1 where id='" + req.query.id + "'";
+    console.log(query,"masab");
+
+    sql.query(connectionString, query, (err, rows) => {
+        res.status(200).json({
+            rows: rows
+        })
+    });
 
 });
 
-app.post('/postData',(req,res)=>{
-     console.log('console data for postl',req.query.title);
-     console.log('console data for postl',req.body.title);
+app.post('/postData', (req, res) => {
+
     // let a =2+ parseInt(req.query.data);
     // res.status(200).json({
     //     result:a
     // })
 
-    const query = "insert into Table_1(id,title,fname,lname) values ('"+1+"','"+req.body.title+"','"+req.body.firstName+"','"+req.body.lastName+"')";
-
-sql.query(connectionString, query, (err, rows) => {
-    res.status(200).json({
-        rows:'record is inserted'
-    })
-});
+    const query = "insert into Table_1(title,fname,lname) values ('" + req.body.title + "','" + req.body.firstName + "','" + req.body.lastName + "')";
+    console.log(query, "asasasassa")
+    sql.query(connectionString, query, (err, rows) => {
+        res.status(200).json({
+            rows: 'record is inserted'
+        })
+    });
 })
 
-app.listen(3060,(req,res)=>{
+app.listen(3060, (req, res) => {
     console.log('Express API is running in port 300');
 })
