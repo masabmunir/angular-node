@@ -37,5 +37,29 @@
               </div>
           </div>
       </form>
+
    </div>
+
+
+   <div class="table-responsive">
+    <br>
+    <table class="table table-striped" id="formdata">
+      <thead>
+          <tr>
+            <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let en of res; index as i">
+            <td scope="row">{{i+1}}</td>
+            <td scope="row">{{en.title}}</td>
+            <td scope="row">{{en.Fname}}</td>
+            <td scope="row">{{en.Lname}}</td>
+          </tr>
+      </tbody>
+  </table>
+     </div>
 </div>      
