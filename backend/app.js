@@ -22,6 +22,7 @@ app.get('/getData', function (req, res) {
     });
 
 });
+
 app.get('/getDataById', function (req, res) {
 
     const query = "SELECT * from Table_1 where id='" + req.query.id + "'";
@@ -35,6 +36,9 @@ app.get('/getDataById', function (req, res) {
 
 });
 
+
+
+
 app.post('/postData', (req, res) => {
 
     // let a =2+ parseInt(req.query.data);
@@ -47,6 +51,34 @@ app.post('/postData', (req, res) => {
     sql.query(connectionString, query, (err, rows) => {
         res.status(200).json({
             rows: 'record is inserted'
+        })
+    });
+})
+
+
+app.post('/updateData', (req, res) => {
+
+    // let a =2+ parseInt(req.query.data);
+    // res.status(200).json({
+    //     result:a
+    // })
+
+    const query = "update Table_1 set title='"+req.body.title+"',Fname='"+req.body.fname+"',Lname='"+req.body.lname+"' where id='"+req.body.id+"'";
+    console.log(query, "asasasassa")
+    sql.query(connectionString, query, (err, rows) => {
+        res.status(200).json({
+            rows: 'record is inserted'
+        })
+    });
+})
+
+app.get('/editdata',(req,res)=>{
+    console.log(req.query.id)
+    let query = "select id,trim(title) as title,Fname,Lname from Table_1 where id='"+req.query.id+"'";
+    sql.query(connectionString,query,(err,rows)=>{
+        console.log(rows)
+        res.status(200).json({
+            record:rows
         })
     });
 })

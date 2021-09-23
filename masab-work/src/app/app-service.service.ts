@@ -18,5 +18,13 @@ export class AppServiceService {
     console.log(formdata,"formdata")
     return this.http.post('/api/postData',formdata);
   }  
+  updateData(formdata:any){
+    console.log(formdata,"formdata")
+    return this.http.post('/api/updateData',formdata);
+  }  
+
+  geteditdata(id:any){
+    return this.http.get('/api/editdata/?id='+id );
+  }
 }
 
